@@ -1,26 +1,19 @@
 package com.telecom.asignaciones.service;
 
-import com.telecom.asignaciones.model.EntidadFederativa;
+import com.telecom.asignaciones.model.Asignacion;
 import com.telecom.asignaciones.repository.AsignacionRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Component
+@Service
 public class AsignacionService {
 
-    public List<ListasGen> findAll() {
-        List<EntidadFederativa> listUsuarios = AsignacionRepository.findAll();
-        List<ListasGen> listaEntidadFederativa = new ArrayList<>();
-        for (EntidadFederativa entidadFederativa : ListasGen) {
-            ListasGen ListasGen = mappingEntityToResponse(listaEntidadFederativa);
-            listaEntidadFederativa.add(ListasGen);
-        }
-        return listaEntidadFederativa;
+    private final AsignacionRepository asignacionRepository;
+
+    public AsignacionService(AsignacionRepository asignacionRepository) {
+        this.asignacionRepository = asignacionRepository;
     }
 
-    private ListasGen mappingEntityToResponse(List<ListasGen> listaEntidadFederativa) {
-        ListasGen ListasGen = new ListasGen();
+    public Asignacion saveAsignacion(Asignacion asignacion) {
+        return asignacionRepository.save(asignacion);
     }
 }

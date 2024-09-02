@@ -1,13 +1,7 @@
 package com.telecom.asignaciones.repository;
 
-import com.telecom.asignaciones.model.EntidadFederativa;
-import org.springframework.stereotype.Repository;
+import com.telecom.asignaciones.model.Asignacion;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.swing.text.html.Option;
-import java.util.List;
-
-@Repository
-public interface AsignacionRepository {
-
-    Option
+public interface AsignacionRepository extends JpaRepository<Asignacion, Integer> {
 }

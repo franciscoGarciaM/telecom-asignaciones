@@ -2,9 +2,7 @@ package com.telecom.asignaciones.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.util.UUID;
@@ -12,8 +10,9 @@ import java.util.UUID;
 @Entity
 @Table(name = "cliente")
 public class Cliente {
-    @Column(name = "id_cliente", length = Integer.MAX_VALUE)
-    private String idCliente;
+    @Id
+    @Column(name = "id_cliente", nullable = false)
+    private Integer id;
 
     @Column(name = "nombre_cliente", length = Integer.MAX_VALUE)
     private String nombreCliente;
@@ -21,19 +20,18 @@ public class Cliente {
     @Column(name = "proyecto", length = Integer.MAX_VALUE)
     private String proyecto;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_proyecto")
-    private com.telecom.asignaciones.model.Proyecto idProyecto;
+    @Column(name = "id_proyecto")
+    private Integer idProyecto;
 
     @Column(name = "uuid_cliente", nullable = false)
     private UUID uuidCliente;
 
-    public String getIdCliente() {
-        return idCliente;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdCliente(String idCliente) {
-        this.idCliente = idCliente;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombreCliente() {
@@ -52,11 +50,11 @@ public class Cliente {
         this.proyecto = proyecto;
     }
 
-    public com.telecom.asignaciones.model.Proyecto getIdProyecto() {
+    public Integer getIdProyecto() {
         return idProyecto;
     }
 
-    public void setIdProyecto(com.telecom.asignaciones.model.Proyecto idProyecto) {
+    public void setIdProyecto(Integer idProyecto) {
         this.idProyecto = idProyecto;
     }
 
