@@ -20,8 +20,7 @@ public class Cliente {
     @Column(name = "proyecto", length = Integer.MAX_VALUE)
     private String proyecto;
 
-    @Column(name = "id_proyecto")
-    private Integer idProyecto;
+
 
     @Column(name = "uuid_cliente", nullable = false)
     private UUID uuidCliente;
@@ -50,13 +49,6 @@ public class Cliente {
         this.proyecto = proyecto;
     }
 
-    public Integer getIdProyecto() {
-        return idProyecto;
-    }
-
-    public void setIdProyecto(Integer idProyecto) {
-        this.idProyecto = idProyecto;
-    }
 
     public UUID getUuidCliente() {
         return uuidCliente;
