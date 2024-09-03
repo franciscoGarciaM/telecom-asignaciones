@@ -1,0 +1,1 @@
+ALTER TABLE public.escenario ADD COLUMN otra_columna varchar NULL;
