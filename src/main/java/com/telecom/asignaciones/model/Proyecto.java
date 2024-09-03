@@ -12,12 +12,15 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "proyecto")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Proyecto {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "proyecto_id_gen")
@@ -33,6 +36,7 @@ public class Proyecto {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cliente")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Cliente idCliente;
 
     @Column(name = "uuid_proyecto", nullable = false)
@@ -41,6 +45,7 @@ public class Proyecto {
     @OneToMany(mappedBy = "idProyecto")
     private Set<Asignacion> asignacions = new LinkedHashSet<>();
 
+    // Getters and Setters
     public Integer getId() {
         return id;
     }
@@ -88,5 +93,4 @@ public class Proyecto {
     public void setAsignacions(Set<Asignacion> asignacions) {
         this.asignacions = asignacions;
     }
-
 }
