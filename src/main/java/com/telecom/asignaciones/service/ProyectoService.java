@@ -1,5 +1,6 @@
 package com.telecom.asignaciones.service;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.telecom.asignaciones.model.Proyecto;
 import com.telecom.asignaciones.repository.ProyectoRepository;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class ProyectoService {
     }
 
     public Proyecto saveProyecto(Proyecto proyecto) {
+
         return proyectoRepository.save(proyecto);
     }
 }

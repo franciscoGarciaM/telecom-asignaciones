@@ -3,9 +3,12 @@ package com.telecom.asignaciones.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
@@ -15,6 +18,8 @@ import java.util.UUID;
 @Table(name = "asignacion")
 public class Asignacion {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "asignacion_id_gen")
+    @SequenceGenerator(name = "asignacion_id_gen", sequenceName = "asignacion_id_seq", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -24,11 +29,11 @@ public class Asignacion {
     @Column(name = "id_enlace", nullable = false, length = Integer.MAX_VALUE)
     private String idEnlace;
 
-    @Column(name = "proyecto", nullable = false, length = Integer.MAX_VALUE)
-    private String proyecto;
+    @Column(name = "nombre_proyecto", nullable = false, length = Integer.MAX_VALUE)
+    private String nombreProyecto;
 
-    @Column(name = "escenario", length = Integer.MAX_VALUE)
-    private String escenario;
+    @Column(name = "nombre_escenario", length = Integer.MAX_VALUE)
+    private String nombreEscenario;
 
     @Column(name = "fecha_inicio", nullable = false)
     private LocalDate fechaInicio;
@@ -36,17 +41,17 @@ public class Asignacion {
     @Column(name = "fecha_asignacion")
     private LocalDate fechaAsignacion;
 
-    @Column(name = "cordinador", length = Integer.MAX_VALUE)
-    private String cordinador;
+    @Column(name = "coordinador", length = Integer.MAX_VALUE)
+    private String coordinador;
 
     @Column(name = "lider", length = Integer.MAX_VALUE)
     private String lider;
 
-    @Column(name = "nomiembros", nullable = false)
-    private Integer nomiembros;
+    @Column(name = "numero_miembros", nullable = false)
+    private Integer numeroMiembros;
 
-    @Column(name = "estado", length = Integer.MAX_VALUE)
-    private String estado;
+    @Column(name = "nombre_estado", length = Integer.MAX_VALUE)
+    private String nombreEstado;
 
     @Column(name = "estatus")
     private Boolean estatus;
@@ -56,15 +61,15 @@ public class Asignacion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_proyecto")
-    private com.telecom.asignaciones.model.Proyecto idProyecto;
+    private Proyecto idProyecto;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_escenario")
-    private com.telecom.asignaciones.model.Escenario idEscenario;
+    private Escenario idEscenario;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_estado")
-    private com.telecom.asignaciones.model.EntidadFederativa idEstado;
+    private EntidadFederativa idEstado;
 
     public Integer getId() {
         return id;
@@ -90,20 +95,20 @@ public class Asignacion {
         this.idEnlace = idEnlace;
     }
 
-    public String getProyecto() {
-        return proyecto;
+    public String getNombreProyecto() {
+        return nombreProyecto;
     }
 
-    public void setProyecto(String proyecto) {
-        this.proyecto = proyecto;
+    public void setNombreProyecto(String nombreProyecto) {
+        this.nombreProyecto = nombreProyecto;
     }
 
-    public String getEscenario() {
-        return escenario;
+    public String getNombreEscenario() {
+        return nombreEscenario;
     }
 
-    public void setEscenario(String escenario) {
-        this.escenario = escenario;
+    public void setNombreEscenario(String nombreEscenario) {
+        this.nombreEscenario = nombreEscenario;
     }
 
     public LocalDate getFechaInicio() {
@@ -122,12 +127,12 @@ public class Asignacion {
         this.fechaAsignacion = fechaAsignacion;
     }
 
-    public String getCordinador() {
-        return cordinador;
+    public String getCoordinador() {
+        return coordinador;
     }
 
-    public void setCordinador(String cordinador) {
-        this.cordinador = cordinador;
+    public void setCoordinador(String coordinador) {
+        this.coordinador = coordinador;
     }
 
     public String getLider() {
@@ -138,20 +143,20 @@ public class Asignacion {
         this.lider = lider;
     }
 
-    public Integer getNomiembros() {
-        return nomiembros;
+    public Integer getNumeroMiembros() {
+        return numeroMiembros;
     }
 
-    public void setNomiembros(Integer nomiembros) {
-        this.nomiembros = nomiembros;
+    public void setNumeroMiembros(Integer numeroMiembros) {
+        this.numeroMiembros = numeroMiembros;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getNombreEstado() {
+        return nombreEstado;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setNombreEstado(String nombreEstado) {
+        this.nombreEstado = nombreEstado;
     }
 
     public Boolean getEstatus() {
@@ -170,27 +175,27 @@ public class Asignacion {
         this.uuidAsignaciones = uuidAsignaciones;
     }
 
-    public com.telecom.asignaciones.model.Proyecto getIdProyecto() {
+    public Proyecto getIdProyecto() {
         return idProyecto;
     }
 
-    public void setIdProyecto(com.telecom.asignaciones.model.Proyecto idProyecto) {
+    public void setIdProyecto(Proyecto idProyecto) {
         this.idProyecto = idProyecto;
     }
 
-    public com.telecom.asignaciones.model.Escenario getIdEscenario() {
+    public Escenario getIdEscenario() {
         return idEscenario;
     }
 
-    public void setIdEscenario(com.telecom.asignaciones.model.Escenario idEscenario) {
+    public void setIdEscenario(Escenario idEscenario) {
         this.idEscenario = idEscenario;
     }
 
-    public com.telecom.asignaciones.model.EntidadFederativa getIdEstado() {
+    public EntidadFederativa getIdEstado() {
         return idEstado;
     }
 
-    public void setIdEstado(com.telecom.asignaciones.model.EntidadFederativa idEstado) {
+    public void setIdEstado(EntidadFederativa idEstado) {
         this.idEstado = idEstado;
     }
 
