@@ -31,6 +31,7 @@ public class Cliente {
 
     @Column(name = "uuid_cliente", nullable = false)
     private UUID uuidCliente;
+
     //@OneToMany(mappedBy = "idCliente", fetch = FetchType.LAZY)
    // @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     //private Set<Proyecto> proyectos = new LinkedHashSet<>();
