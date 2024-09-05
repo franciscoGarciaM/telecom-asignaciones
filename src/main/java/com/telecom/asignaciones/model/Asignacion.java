@@ -199,4 +199,6 @@ public class Asignacion {
         this.idEstado = idEstado;
     }
 
+    public void setUuidAsignacion(UUID uuid) {
+    }
 }

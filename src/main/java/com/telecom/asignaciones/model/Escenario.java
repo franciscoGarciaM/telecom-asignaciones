@@ -1,9 +1,13 @@
 package com.telecom.asignaciones.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 import java.util.LinkedHashSet;
@@ -12,8 +16,11 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "escenario")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Escenario {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "escenario_id_gen")
+    @SequenceGenerator(name = "escenario_id_gen", sequenceName = "escenario_id_escenario_seq", allocationSize = 1)
     @Column(name = "id_escenario", nullable = false)
     private Integer id;
 
@@ -32,6 +39,7 @@ public class Escenario {
     @OneToMany(mappedBy = "idEscenario")
     private Set<Asignacion> asignacions = new LinkedHashSet<>();
 
+    // Getters and Setters
     public Integer getId() {
         return id;
     }
@@ -79,5 +87,4 @@ public class Escenario {
     public void setAsignacions(Set<Asignacion> asignacions) {
         this.asignacions = asignacions;
     }
-
 }
