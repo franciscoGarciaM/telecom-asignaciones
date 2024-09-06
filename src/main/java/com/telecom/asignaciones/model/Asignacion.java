@@ -29,8 +29,9 @@ public class Asignacion {
     @Column(name = "id_enlace", nullable = false, length = Integer.MAX_VALUE)
     private String idEnlace;
 
-    @Column(name = "nombre_proyecto", nullable = false, length = Integer.MAX_VALUE)
+    @Column(nullable = false)
     private String nombreProyecto;
+
 
     @Column(name = "nombre_escenario", length = Integer.MAX_VALUE)
     private String nombreEscenario;
@@ -180,23 +181,16 @@ public class Asignacion {
     }
 
     public void setIdProyecto(Proyecto idProyecto) {
-        this.idProyecto = idProyecto;
+
     }
 
-    public Escenario getIdEscenario() {
-        return idEscenario;
-    }
+
 
     public void setIdEscenario(Escenario idEscenario) {
-        this.idEscenario = idEscenario;
-    }
-
-    public EntidadFederativa getIdEstado() {
-        return idEstado;
     }
 
     public void setIdEstado(EntidadFederativa idEstado) {
-        this.idEstado = idEstado;
+
     }
 
     public void setUuidAsignacion(UUID uuid) {

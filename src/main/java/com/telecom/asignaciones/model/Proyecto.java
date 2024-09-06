@@ -29,7 +29,7 @@ public class Proyecto {
     @Column(name = "id_proyecto", nullable = false)
     private Integer id;
 
-    @Column(name = "nombre_proyecto", nullable = false, length = Integer.MAX_VALUE)
+    @Column(name = "nombre_proyecto", length = Integer.MAX_VALUE, nullable = true)
     private String nombreProyecto;
 
     @Column(name = "lider_proyecto", length = Integer.MAX_VALUE)
