@@ -1,0 +1,1 @@
+ALTER TABLE public.proyecto DROP COLUMN nombreproyecto;

@@ -1,0 +1,1 @@
+ALTER TABLE public.proyecto ADD COLUMN factor_cobro NUMERIC (1, 2) NULL;

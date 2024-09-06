@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -41,6 +42,9 @@ public class Proyecto {
 
     @Column(name = "uuid_proyecto", nullable = false)
     private UUID uuidProyecto;
+
+    @Column(name = "factor_cobro")
+    private Double factorCobro;
 
     @OneToMany(mappedBy = "idProyecto")
     private Set<Asignacion> asignacions = new LinkedHashSet<>();
@@ -92,5 +96,13 @@ public class Proyecto {
 
     public void setAsignacions(Set<Asignacion> asignacions) {
         this.asignacions = asignacions;
+    }
+
+    public Double getFactorCobro() {
+        return factorCobro;
+    }
+
+    public void setFactorCobro(Double factorCobro) {
+        this.factorCobro = factorCobro;
     }
 }
