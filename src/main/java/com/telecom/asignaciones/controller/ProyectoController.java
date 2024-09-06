@@ -26,10 +26,9 @@ public class ProyectoController {
         return proyectoService.getAllProyectos();
     }
 
-    @GetMapping
-    public List<Proyecto> getProyectoBYID() {
-        return proyectoService.getAllProyectos();
-    }
+   //@GetMapping("")
+   // public List<Proyecto> getProyectoBYID() {
+        //return proyectoService.getAllProyectos();}
 
     @PostMapping
     public Proyecto createProyecto(@RequestBody Proyecto proyecto)

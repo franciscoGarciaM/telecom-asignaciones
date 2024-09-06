@@ -30,26 +30,6 @@ public class AsignacionService {
     @Transactional
     public Asignacion saveAsignacion(Asignacion asignacion) {
         asignacion.setUuidAsignacion(UUID.randomUUID());
-
-        // Configurar la EntidadFederativa asociada
-        if (asignacion.getIdEstado() != null) {
-            EntidadFederativa entidadFederativa = entidadFederativaService.getEntidadFederativaById(asignacion.getIdEstado().getId());
-            asignacion.setIdEstado(entidadFederativa);
-        }
-
-        // Configurar el Proyecto asociado
-        if (asignacion.getIdProyecto() != null) {
-            Proyecto proyecto = proyectoService.getProyectoById(asignacion.getIdProyecto().getId());
-            asignacion.setIdProyecto(proyecto);
-        }
-
-        // Configurar el Escenario asociado
-        if (asignacion.getIdEscenario() != null) {
-            Escenario escenario = escenarioService.getEscenarioById(asignacion.getIdEscenario().getId());
-            asignacion.setIdEscenario(escenario);
-        }
-
-        // Guardar la asignación
         return asignacionRepository.save(asignacion);
     }
 }

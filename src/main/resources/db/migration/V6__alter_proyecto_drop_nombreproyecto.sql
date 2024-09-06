@@ -1,1 +1,1 @@
-ALTER TABLE public.proyecto DROP COLUMN nombreproyecto;
+ALTER TABLE public.proyecto DROP COLUMN IF EXISTS nombreproyecto ;
