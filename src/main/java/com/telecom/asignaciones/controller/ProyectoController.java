@@ -2,37 +2,41 @@ package com.telecom.asignaciones.controller;
 
 import com.telecom.asignaciones.model.Proyecto;
 import com.telecom.asignaciones.service.ProyectoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/1/proyectos")
+@RequestMapping("/api/proyectos")
 public class ProyectoController {
 
-    private final ProyectoService proyectoService;
+    @Autowired
+    private ProyectoService proyectoService;
 
-    public ProyectoController(ProyectoService proyectoService) {
-        this.proyectoService = proyectoService;
-    }
-
+    // Obtener todos los proyectos
     @GetMapping
-    public List<Proyecto> getProyectos() {
-        return proyectoService.getAllProyectos();
+    public ResponseEntity<List<Proyecto>> getAllProyectos() {
+        List<Proyecto> proyectos = proyectoService.getAllProyectos();
+        return new ResponseEntity<>(proyectos, HttpStatus.OK);
     }
 
-   //@GetMapping("")
-   // public List<Proyecto> getProyectoBYID() {
-        //return proyectoService.getAllProyectos();}
+    // Obtener proyecto por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Proyecto> getProyectoById(@PathVariable Integer id) {
+        Proyecto proyecto = proyectoService.getProyectoById(id);
+        return new ResponseEntity<>(proyecto, HttpStatus.OK);
+    }
 
+    // Crear un nuevo proyecto
     @PostMapping
-    public Proyecto createProyecto(@RequestBody Proyecto proyecto)
-    {
-        return proyectoService.saveProyecto(proyecto);
+    public ResponseEntity<Proyecto> createProyecto(@RequestBody Proyecto proyecto) {
+        Proyecto nuevoProyecto = proyectoService.saveProyecto(proyecto);
+        return new ResponseEntity<>(nuevoProyecto, HttpStatus.CREATED);
     }
+
+
+
 }

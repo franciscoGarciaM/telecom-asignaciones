@@ -34,14 +34,21 @@ public class AsignacionService {
     public Asignacion saveAsignacion(Asignacion asignacion) {
         asignacion.setUuidAsignacion(UUID.randomUUID());
 
-        // Actualizar los nombres basados en los IDs
-        Optional<Proyecto> proyecto = proyectoRepository.findById(asignacion.getIdProyecto().getId());
-        Optional<Escenario> escenario = escenarioRepository.findById(asignacion.ge.getId());
-        Optional<EntidadFederativa> entidadFederativa = entidadFederativaRepository.findById(asignacion.getNombreEstado().getId());
+        // Validar que los IDs no sean nulos antes de buscar en la base de datos
+        if (asignacion.getIdProyecto() != null && asignacion.getIdProyecto().getId() != null) {
+            Optional<Proyecto> proyecto = proyectoRepository.findById(asignacion.getIdProyecto().getId());
+            proyecto.ifPresent(p -> asignacion.setNombreProyecto(p.getNombreProyecto()));
+        }
 
-        proyecto.ifPresent(p -> asignacion.setNombreProyecto(p.getNombreProyecto()));
-        escenario.ifPresent(e -> asignacion.setNombreEscenario(e.getNombreEscenario()));
-        entidadFederativa.ifPresent(e -> asignacion.setNombreEstado(e.getNombreEstado()));
+        if (asignacion.getIdEscenario() != null && asignacion.getIdEscenario().getId() != null) {
+            Optional<Escenario> escenario = escenarioRepository.findById(asignacion.getIdEscenario().getId());
+            escenario.ifPresent(e -> asignacion.setNombreEscenario(e.getNombreEscenario()));
+        }
+
+        if (asignacion.getIdEstado() != null && asignacion.getIdEstado().getId() != null) {
+            Optional<EntidadFederativa> entidadFederativa = entidadFederativaRepository.findById(asignacion.getIdEstado().getId());
+            entidadFederativa.ifPresent(e -> asignacion.setNombreEstado(e.getNombreEstado()));
+        }
 
         return asignacionRepository.save(asignacion);
     }

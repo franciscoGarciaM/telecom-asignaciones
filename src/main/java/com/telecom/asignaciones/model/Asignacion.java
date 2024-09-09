@@ -60,17 +60,18 @@ public class Asignacion {
     @Column(name = "uuid_asignaciones", nullable = false)
     private UUID uuidAsignaciones;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_proyecto")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_proyecto", nullable = false)
     private Proyecto idProyecto;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_escenario")
+    @ManyToOne
+    @JoinColumn(name = "id_escenario", nullable = false)
     private Escenario idEscenario;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_estado")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_estado", nullable = false)
     private EntidadFederativa idEstado;
+
 
     public Integer getId() {
         return id;
@@ -180,18 +181,27 @@ public class Asignacion {
         return idProyecto;
     }
 
-    public void setIdProyecto(Proyecto idProyecto) {
 
+    public Escenario getIdEscenario() {
+        return idEscenario;
     }
 
+    public EntidadFederativa getIdEstado() {
+        return idEstado;
+    }
 
+    public void setIdProyecto(Proyecto idProyecto) {
+        this.idProyecto = idProyecto;
+    }
 
     public void setIdEscenario(Escenario idEscenario) {
+        this.idEscenario = idEscenario;
     }
 
     public void setIdEstado(EntidadFederativa idEstado) {
-
+        this.idEstado = idEstado;
     }
+
 
     public void setUuidAsignacion(UUID uuid) {
     }
