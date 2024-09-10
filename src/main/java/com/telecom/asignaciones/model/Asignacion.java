@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -23,19 +24,22 @@ public class Asignacion {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @NotNull
     @Column(name = "nombre_sitio", nullable = false, length = Integer.MAX_VALUE)
     private String nombreSitio;
 
+    @NotNull
     @Column(name = "id_enlace", nullable = false, length = Integer.MAX_VALUE)
     private String idEnlace;
 
-    @Column(nullable = false)
+    @NotNull
+    @Column(name = "nombre_proyecto", nullable = false, length = Integer.MAX_VALUE)
     private String nombreProyecto;
-
 
     @Column(name = "nombre_escenario", length = Integer.MAX_VALUE)
     private String nombreEscenario;
 
+    @NotNull
     @Column(name = "fecha_inicio", nullable = false)
     private LocalDate fechaInicio;
 
@@ -48,6 +52,7 @@ public class Asignacion {
     @Column(name = "lider", length = Integer.MAX_VALUE)
     private String lider;
 
+    @NotNull
     @Column(name = "numero_miembros", nullable = false)
     private Integer numeroMiembros;
 
@@ -57,21 +62,21 @@ public class Asignacion {
     @Column(name = "estatus")
     private Boolean estatus;
 
+    @NotNull
     @Column(name = "uuid_asignaciones", nullable = false)
     private UUID uuidAsignaciones;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_proyecto", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_proyecto")
     private Proyecto idProyecto;
 
-    @ManyToOne
-    @JoinColumn(name = "id_escenario", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_escenario")
     private Escenario idEscenario;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_estado", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_estado")
     private EntidadFederativa idEstado;
-
 
     public Integer getId() {
         return id;
@@ -181,21 +186,20 @@ public class Asignacion {
         return idProyecto;
     }
 
+    public void setIdProyecto(Proyecto idProyecto) {
+        this.idProyecto = idProyecto;
+    }
 
     public Escenario getIdEscenario() {
         return idEscenario;
     }
 
-    public EntidadFederativa getIdEstado() {
-        return idEstado;
-    }
-
-    public void setIdProyecto(Proyecto idProyecto) {
-        this.idProyecto = idProyecto;
-    }
-
     public void setIdEscenario(Escenario idEscenario) {
         this.idEscenario = idEscenario;
+    }
+
+    public EntidadFederativa getIdEstado() {
+        return idEstado;
     }
 
     public void setIdEstado(EntidadFederativa idEstado) {
@@ -203,6 +207,4 @@ public class Asignacion {
     }
 
 
-    public void setUuidAsignacion(UUID uuid) {
-    }
 }
