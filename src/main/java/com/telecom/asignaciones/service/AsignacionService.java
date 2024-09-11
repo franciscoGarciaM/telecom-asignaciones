@@ -29,26 +29,28 @@ public class AsignacionService {
     private EntidadFederativaRepository entidadFederativaRepository;
 
     public Asignacion saveAsignacion(AsignacionesRequest request) {
-        // Obtener los IDs de las entidades desde el request
-        int proyectoId = request.getProyecto().getId();
-        int escenarioId = request.getEscenario().getId();
-        int estadoId = request.getEstado().getId();
+        Asignacion asignacion = mappingEntityTo(request);
+        return asignacionRepository.save(asignacion);
+    }
 
-        // Buscar las entidades en los repositorios
+    public Asignacion mappingEntityTo(AsignacionesRequest request) {
+        Integer proyectoId = request.getProyecto().getId();
+        Integer escenarioId = request.getEscenario().getId();
+        Integer estadoId = request.getEstado().getId();
+
         Proyecto proyecto = proyectoRepository.findById(proyectoId)
-                .orElseThrow(() -> new ResourceNotFoundException("Proyecto no encontrado con el ID proporcionado."));
+                .orElseThrow(() -> new ResourceNotFoundException("Proyecto no encontrado con el ID: " + proyectoId));
 
         Escenario escenario = escenarioRepository.findById(escenarioId)
-                .orElseThrow(() -> new ResourceNotFoundException("Escenario no encontrado con el ID proporcionado."));
+                .orElseThrow(() -> new ResourceNotFoundException("Escenario no encontrado con el ID: " + escenarioId));
 
         EntidadFederativa estado = entidadFederativaRepository.findById(estadoId)
-                .orElseThrow(() -> new ResourceNotFoundException("Estado no encontrado con el ID proporcionado."));
+                .orElseThrow(() -> new ResourceNotFoundException("Estado no encontrado con el ID: " + estadoId));
 
-        // Crear y configurar la entidad Asignacion
         Asignacion asignacion = new Asignacion();
-        asignacion.setProyecto(proyecto);
-        asignacion.setEscenario(escenario);
-        asignacion.setEstado(estado);
+        asignacion.setIdProyecto(proyecto);
+        asignacion.setIdEscenario(escenario);
+        asignacion.setIdEstado(estado);
         asignacion.setNombreSitio(request.getNombreSitio());
         asignacion.setIdEnlace(request.getIdEnlace());
         asignacion.setFechaInicio(request.getFechaInicio());
@@ -56,8 +58,8 @@ public class AsignacionService {
         asignacion.setCoordinador(request.getCoordinador());
         asignacion.setLider(request.getLider());
         asignacion.setNumeroMiembros(request.getNumeroMiembros());
+        asignacion.setEstatus(request.getEstatus());
 
-        // Guardar la entidad Asignacion en el repositorio
-        return asignacionRepository.save(asignacion);
+        return asignacion;
     }
 }

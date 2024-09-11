@@ -7,6 +7,7 @@ public class AsignacionesRequest {
     private Proyecto proyecto;
     private Escenario escenario;
     private Estado estado;
+    private Boolean estatus;
     private String nombreSitio;
     private String idEnlace;
     private LocalDate fechaInicio;
@@ -16,6 +17,14 @@ public class AsignacionesRequest {
     private int numeroMiembros;
 
     // Getters and Setters
+
+    public Boolean getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(Boolean estatus) {
+        this.estatus = estatus;
+    }
 
     public Proyecto getProyecto() {
         return proyecto;

@@ -1,25 +1,28 @@
 package com.telecom.asignaciones.controller;
 
 import com.telecom.asignaciones.model.Asignacion;
+import com.telecom.asignaciones.request.AsignacionesRequest;
 import com.telecom.asignaciones.service.AsignacionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.UUID;
-
 @RestController
-@RequestMapping("/api/1/asignaciones")
+@RequestMapping("/api/v1/asignaciones")
 public class AsignacionController {
 
-    private final AsignacionService asignacionService;
-
-    public AsignacionController(AsignacionService asignacionService) {
-        this.asignacionService = asignacionService;
-    }
+    @Autowired
+    private AsignacionService asignacionService;
 
     @PostMapping
-    public Asignacion createAsignacion(@RequestBody Asignacion asignacion) {
-
-        return asignacionService.saveAsignacion(asignacion);
+    public ResponseEntity<Asignacion> createAsignacion(@RequestBody AsignacionesRequest request) {
+        try {
+            Asignacion asignacion = asignacionService.saveAsignacion(request);
+            return ResponseEntity.status(201).body(asignacion);
+        } catch (Exception e) {
+            // Log the exception for debugging
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(null);
+        }
     }
 }
